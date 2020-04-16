@@ -15,6 +15,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        NetworkProvider.shared.getMoyaProvider().request(.geocode(address: "38R5+W8 Zhodzina, Belarus")) { result in
+            switch result{
+            case .success(let response):
+                if let json : [String:Any] = try? JSONSerialization.jsonObject(with: response.data, options: .allowFragments) as? [String: Any]{
+                    
+                    guard
+                        let results = json["results"] as? Array<Any>,
+                        !results.isEmpty,
+                        let result = results[0] as? [String: Any] else {
+                            print("location not found")
+                            return
+                    }
+                    
+                   
+                        guard
+                            let geometry = result["geometry"] as? [String: Any],
+                            let location = geometry["location"] as? [String: Any],
+                            let lat = location["lat"] as? Double,
+                            let lng = location["lng"] as? Double else {
+                            print("location not found")
+                            return
+                        }
+
+                    print("\(lat) \(lng)")
+                    
+                    
+                }else{
+                    print("location not found")
+                }
+
+            case .failure(let error):
+                print(error.localizedDescription)
+                print("location not found")
+            }
+        }
+        
         return true
     }
 
