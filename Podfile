@@ -6,6 +6,7 @@ target 'TravelApp-Admin' do
   use_frameworks!
 
 	pod 'Moya'
+  pod 'CoreXLSX'
 
   # Pods for TravelApp-Admin
 
