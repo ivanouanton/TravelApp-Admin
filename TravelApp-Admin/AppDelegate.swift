@@ -12,8 +12,6 @@ import SwiftyDropbox
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         DropboxClientsManager.setupWithAppKey("g6bhcu31gt08crd")
@@ -33,6 +31,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
+        if let authResult = DropboxClientsManager.handleRedirectURL(url) {
+            switch authResult {
+            case .success:
+                print("Success! User is logged into Dropbox.")
+            case .cancel:
+                print("Authorization flow was manually canceled by user!")
+            case .error(_, let description):
+                print("Error: \(description)")
+            }
+        }
+        return true
+    }
+    
+    
+
 
 
 }

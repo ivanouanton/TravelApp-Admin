@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import SwiftyDropbox
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -15,9 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+        let arrDropboxImages = NSMutableArray()
 
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView()
@@ -25,10 +25,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
+            window.rootViewController = StartViewController.loadFromNib() as StartViewController
+//            window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window
             window.makeKeyAndVisible()
-            PlaceManager.shared.parseExel()
         }
     }
 
@@ -60,6 +60,50 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url {
+            // Handle URL
+            if let authResult = DropboxClientsManager.handleRedirectURL(url as URL) {
+                switch authResult {
+                case .success:
+                    print("Success! User is logged into Dropbox.")
+                case .cancel:
+                    print("Authorization flow was manually canceled by user!")
+                case .error(_, let description):
+                    print("Error: \(description)")
+                }
+            }
+        }
+
+    }
+    
+//    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+//        guard let url = URLContexts.first?.url else {
+//            return
+//        }
+//    }
+    
+//    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+//        guard let context = URLContexts.first else {
+//            return
+//        }
+//
+////        ApplicationDelegate.shared.application(
+////            UIApplication.shared,
+////            open: context.url,
+////            sourceApplication: context.options.sourceApplication,
+////            annotation: context.options.annotation
+////        )
+//    }
+
 
 }
+
+extension UIViewController {
+    class func loadFromNib<T: UIViewController>() -> T {
+         return T(nibName: String(describing: self), bundle: nil)
+    }
+}
+
 

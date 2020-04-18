@@ -9,9 +9,23 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @State var showDetails = false
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+            Button(action: {
+                self.showDetails.toggle()
+                PlaceManager.shared.getDPImages(with: UIHostingController(rootView: self))
+//                PlaceManager.shared.parseExel()
+            }) {
+                Text("Show details")
+            }
+
+            if showDetails {
+                Text("You should follow me on Twitter: @twostraw")
+                    .font(.largeTitle)
+                    .lineLimit(nil)
+            }
+        }
     }
 }
 

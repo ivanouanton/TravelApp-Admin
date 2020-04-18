@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		997DFAFFFA71955A830953BD /* Pods_TravelApp_Admin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB021033CA6A05A2961F0D4 /* Pods_TravelApp_Admin.framework */; };
 		F72989F92448D8E300B19D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72989F82448D8E300B19D29 /* AppDelegate.swift */; };
-		F72989FB2448D8E300B19D29 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72989FA2448D8E300B19D29 /* SceneDelegate.swift */; };
 		F72989FD2448D8E300B19D29 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72989FC2448D8E300B19D29 /* ContentView.swift */; };
 		F72989FF2448D8E500B19D29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F72989FE2448D8E500B19D29 /* Assets.xcassets */; };
 		F7298A022448D8E500B19D29 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7298A012448D8E500B19D29 /* Preview Assets.xcassets */; };
@@ -19,6 +18,10 @@
 		F7298A122448DEDF00B19D29 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7298A112448DEDF00B19D29 /* NetworkProvider.swift */; };
 		F7298A142448EC2D00B19D29 /* PlaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7298A132448EC2D00B19D29 /* PlaceManager.swift */; };
 		F7298A182448F2D600B19D29 /* rome.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = F7298A172448F2D600B19D29 /* rome.xlsx */; };
+		F72AA50F244B904200BA71A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72AA50E244B904200BA71A4 /* SceneDelegate.swift */; };
+		F7BFE279244B6F56003F3CF3 /* DropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BFE278244B6F56003F3CF3 /* DropBoxView.swift */; };
+		F7BFE27F244B71B6003F3CF3 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BFE27D244B71B6003F3CF3 /* StartViewController.swift */; };
+		F7BFE280244B71B6003F3CF3 /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7BFE27E244B71B6003F3CF3 /* StartViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +29,6 @@
 		DD7E37C7B1A67B1038556965 /* Pods-TravelApp-Admin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelApp-Admin.debug.xcconfig"; path = "Target Support Files/Pods-TravelApp-Admin/Pods-TravelApp-Admin.debug.xcconfig"; sourceTree = "<group>"; };
 		F72989F52448D8E300B19D29 /* TravelApp-Admin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TravelApp-Admin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F72989F82448D8E300B19D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F72989FA2448D8E300B19D29 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F72989FC2448D8E300B19D29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F72989FE2448D8E500B19D29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F7298A012448D8E500B19D29 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -37,6 +39,10 @@
 		F7298A112448DEDF00B19D29 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		F7298A132448EC2D00B19D29 /* PlaceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceManager.swift; sourceTree = "<group>"; };
 		F7298A172448F2D600B19D29 /* rome.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = rome.xlsx; sourceTree = "<group>"; };
+		F72AA50E244B904200BA71A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F7BFE278244B6F56003F3CF3 /* DropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropBoxView.swift; sourceTree = "<group>"; };
+		F7BFE27D244B71B6003F3CF3 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		F7BFE27E244B71B6003F3CF3 /* StartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartViewController.xib; sourceTree = "<group>"; };
 		FD665082253513DBB0DAFB0F /* Pods-TravelApp-Admin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelApp-Admin.release.xcconfig"; path = "Target Support Files/Pods-TravelApp-Admin/Pods-TravelApp-Admin.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				F72989F82448D8E300B19D29 /* AppDelegate.swift */,
-				F72989FA2448D8E300B19D29 /* SceneDelegate.swift */,
+				F72AA50E244B904200BA71A4 /* SceneDelegate.swift */,
 				F72989FC2448D8E300B19D29 /* ContentView.swift */,
 				F72989FE2448D8E500B19D29 /* Assets.xcassets */,
 				F7298A032448D8E500B19D29 /* LaunchScreen.storyboard */,
@@ -118,6 +124,9 @@
 				F7298A0F2448DB9900B19D29 /* Defaults.swift */,
 				F7298A112448DEDF00B19D29 /* NetworkProvider.swift */,
 				F7298A132448EC2D00B19D29 /* PlaceManager.swift */,
+				F7BFE278244B6F56003F3CF3 /* DropBoxView.swift */,
+				F7BFE27D244B71B6003F3CF3 /* StartViewController.swift */,
+				F7BFE27E244B71B6003F3CF3 /* StartViewController.xib */,
 			);
 			path = Additional;
 			sourceTree = "<group>";
@@ -186,6 +195,7 @@
 				F7298A022448D8E500B19D29 /* Preview Assets.xcassets in Resources */,
 				F7298A182448F2D600B19D29 /* rome.xlsx in Resources */,
 				F72989FF2448D8E500B19D29 /* Assets.xcassets in Resources */,
+				F7BFE280244B71B6003F3CF3 /* StartViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,9 +250,11 @@
 			files = (
 				F72989F92448D8E300B19D29 /* AppDelegate.swift in Sources */,
 				F7298A0D2448DA5C00B19D29 /* GoogleApiServices.swift in Sources */,
+				F72AA50F244B904200BA71A4 /* SceneDelegate.swift in Sources */,
 				F7298A102448DB9900B19D29 /* Defaults.swift in Sources */,
-				F72989FB2448D8E300B19D29 /* SceneDelegate.swift in Sources */,
 				F7298A142448EC2D00B19D29 /* PlaceManager.swift in Sources */,
+				F7BFE27F244B71B6003F3CF3 /* StartViewController.swift in Sources */,
+				F7BFE279244B6F56003F3CF3 /* DropBoxView.swift in Sources */,
 				F72989FD2448D8E300B19D29 /* ContentView.swift in Sources */,
 				F7298A122448DEDF00B19D29 /* NetworkProvider.swift in Sources */,
 			);
@@ -386,6 +398,7 @@
 				DEVELOPMENT_TEAM = 582C82KJTU;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "TravelApp-Admin/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -407,6 +420,7 @@
 				DEVELOPMENT_TEAM = 582C82KJTU;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "TravelApp-Admin/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
