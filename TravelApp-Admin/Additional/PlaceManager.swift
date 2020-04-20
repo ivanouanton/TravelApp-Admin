@@ -12,6 +12,8 @@ import SwiftyDropbox
 import UIKit
 import FirebaseStorage
 
+import FirebaseFirestore
+
 class PlaceManager {
     static let shared = PlaceManager()
     
@@ -266,6 +268,29 @@ class PlaceManager {
             let pathComponent = "\(UUID)-\(fileName)"
             return directoryURL.appendingPathComponent(pathComponent) as NSURL
         }
+    
+    
+    func saveData() {
+        let db = Firestore.firestore()
+        var ref: DocumentReference? = nil
+        ref = db.collection("colin").addDocument(data: [
+            "address": "Ada",
+            "audio": "Lovelace",
+            "category": 1815,
+            "description": ,
+            "image": ,
+            "isMustVisit": ,
+            "location": ,
+            "name": ,
+            "price": ,
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+    }
  
 }
 
