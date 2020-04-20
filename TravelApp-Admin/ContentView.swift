@@ -14,7 +14,7 @@ struct ContentView: View {
         VStack {
             Button(action: {
                 self.showDetails.toggle()
-                PlaceManager.shared.getDPImages(with: UIHostingController(rootView: self))
+//                PlaceManager.shared.getDPImages(with: UIHostingController(rootView: self))
 //                PlaceManager.shared.parseExel()
             }) {
                 Text("Show details")

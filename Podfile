@@ -6,6 +6,8 @@ target 'TravelApp-Admin' do
 	pod 'Moya'
   pod 'CoreXLSX'
   pod 'SwiftyDropbox'
+  
+  pod 'Firebase/Storage'
 
 
 end

@@ -9,6 +9,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StartViewController" customModule="TravelApp_Admin" customModuleProvider="target">
             <connections>
+                <outlet property="downloadProgLbl" destination="exr-H9-gyr" id="s0B-rU-ECm"/>
+                <outlet property="uploadProgLbl" destination="oCm-vn-6AM" id="NHZ-D3-Uch"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,11 +26,27 @@
                         <action selector="doSomeAction:" destination="-1" eventType="touchUpInside" id="ppY-K1-6BG"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exr-H9-gyr">
+                    <rect key="frame" x="71" y="542" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCm-vn-6AM">
+                    <rect key="frame" x="71" y="598" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="oCm-vn-6AM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="71" id="7Xb-EP-7ep"/>
                 <constraint firstItem="uAU-x0-ePS" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="HE8-QH-Lr9"/>
+                <constraint firstItem="exr-H9-gyr" firstAttribute="top" secondItem="uAU-x0-ePS" secondAttribute="bottom" constant="74" id="N9E-Vo-QJk"/>
+                <constraint firstItem="oCm-vn-6AM" firstAttribute="top" secondItem="exr-H9-gyr" secondAttribute="bottom" constant="35" id="VTy-g0-ry4"/>
                 <constraint firstItem="uAU-x0-ePS" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="X36-qq-dDy"/>
+                <constraint firstItem="exr-H9-gyr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="71" id="kLP-dy-pqp"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="132" y="147"/>

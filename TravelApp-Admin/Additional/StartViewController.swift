@@ -9,7 +9,10 @@
 import UIKit
 
 class StartViewController: UIViewController {
-
+    
+    @IBOutlet weak var downloadProgLbl: UILabel!
+    @IBOutlet weak var uploadProgLbl: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -10,13 +10,18 @@ import Foundation
 import CoreXLSX
 import SwiftyDropbox
 import UIKit
+import FirebaseStorage
 
 class PlaceManager {
     static let shared = PlaceManager()
     
     private init() {}
     
+    let storage = Storage.storage()
+    
     let arrDropboxImages = NSMutableArray()
+    
+    var startVC: StartViewController?
     
     func parseExel() {
         
@@ -87,7 +92,9 @@ class PlaceManager {
         }
     }
     
-    func getDPImages(with vc: UIViewController) {
+    func getDPImages(with vc: StartViewController) {
+        self.startVC = vc
+        
         if (DropboxClientsManager.authorizedClient != nil) {
             
             //User is already authorized
@@ -102,7 +109,7 @@ class PlaceManager {
                 UIApplication.shared.openURL(url)
                 
                 //Fetch images from user's DropBox folder
-                self.getImageFromDropbox()
+//                self.getImageFromDropbox()
                 print("success auth")
             })
             
@@ -110,77 +117,130 @@ class PlaceManager {
     }
     
     //Fetch all images from DropBox
-        func getImageFromDropbox() {
-            
-            let client = DropboxClientsManager.authorizedClient
-            
-            //Get list of folder of dropbox by set (path: "/")
-            //Or you can get folder inside a folder by set (path: "/Photos")
-            
-
-            
-            client!.files.listFolder(path: "/Urbs Location Images").response{ (objList, error) in
-                if let resultList = objList {
-                    //var entrycount = resultList.entries.count
-                    
-                    //Create a for loop for get all the entities individually
-                    for entry in resultList.entries {
-                        //entrycount -= 1
+    func getImageFromDropbox() {
+        
+        let client = DropboxClientsManager.authorizedClient
+        
+        //Get list of folder of dropbox by set (path: "/")
+        //Or you can get folder inside a folder by set (path: "/Photos")
+        
+        
+        
+        client!.files.listFolder(path: "/new").response{ (objList, error) in
+            if let resultList = objList {
+                var entrycount = resultList.entries.count
+                print(entrycount)
+                var r = 0
+                var t = 0
+                
+                let concurrentTasks = 4
+                
+                let queue = DispatchQueue.global(qos: .background)
+                let sema = DispatchSemaphore(value: concurrentTasks)
+                
+                
+                //Create a for loop for get all the entities individually
+                for entry in resultList.entries {
+   
+//      
+                    //Check if file have metadata or not
+                    if let fileMetadata = entry as? Files.FileMetadata {
+                        //                            print("METADATA-EXISTS")
                         
-                        //Check if file have metadata or not
-                        if let fileMetadata = entry as? Files.FileMetadata {
+                        
+                        //Check file type by extention .jpg/.png
+                        //You can check this by your own added extention
+                        if self.isFileImage(filename: fileMetadata.name) == true {
                             
-                            //Check file type by extention .jpg/.png
-                            //You can check this by your own added extention
-                            if self.isFileImage(filename: fileMetadata.name) == true {
+                            //Get Path for save image in document directory
+                            let destination : (NSURL, HTTPURLResponse) -> NSURL = { temporaryURL, response in
+                                return self.getDocumentDirectoryPath(fileName: fileMetadata.name)
+                            }
+                            
+                            //Download Image on destination path
+                            queue.async {
                                 
-                                //Get Path for save image in document directory
-                                let destination : (NSURL, HTTPURLResponse) -> NSURL = { temporaryURL, response in
-                                    return self.getDocumentDirectoryPath(fileName: fileMetadata.name)
+                            client!.files.download(path: fileMetadata.pathLower!).response(queue: queue) { response, error in
+                                    r += 1
+                                    print(r)
+                                DispatchQueue.main.async {
+                                    self.startVC?.downloadProgLbl.text = "Downloaded \(r)/\(r)"
                                 }
                                 
-                                //Download Image on destination path
-                                
-                                client!.files.download(path: fileMetadata.pathLower!).response { response, error in
-                                    
+                                    sema.signal()
+//                                    print(response?.0.name ?? "Error name")
                                     if let (_, url) = response {
                                         let data = response?.1
-//                                        let data = NSData(contentsOfURL: url)
+                                        
+                                        if let name = response?.0.name,
+                                            let data = data{
+                                            let riversRef = self.storage.reference().child("rome_places/\(name)")
+                                            print("Download \(name)")
+                                            
+                                            let uploadTask = riversRef.putData(data, metadata: nil) { (metadata, error) in
+                                                guard let metadata = metadata else {
+                                                    // Uh-oh, an error occurred!
+                                                    return
+                                                }
+                                                t += 1
+                                                DispatchQueue.main.async {
+                                                    self.startVC?.uploadProgLbl.text = "Uploaded \(t)/\(r)"
+                                                }
+                                                // Metadata contains file metadata such as size, content-type.
+                                                let size = metadata.size
+                                                // You can also access to download URL after upload.
+                                                riversRef.downloadURL { (url, error) in
+                                                    guard let downloadURL = url else {
+                                                        // Uh-oh, an error occurred!
+                                                        return
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        //                                        let data = NSData(contentsOfURL: url)
                                         let img = UIImage(data: data!)
                                         
                                         if !self.arrDropboxImages.contains(img!) {
                                             self.arrDropboxImages.add(img!)
-//                                            self.collectionViewDropbox.hidden = false
-//                                            self.collectionViewDropbox.reloadData()
+                                            //                                            self.collectionViewDropbox.hidden = false
+                                            //                                            self.collectionViewDropbox.reloadData()
                                         }
                                         else {
                                             print("Image already added to array")
                                         }
                                     }
                                 }
-                            } else {
-                                //File is not an image
-                            }
-                        } else {
-                            //If file have not metadata it mean it is a folder.
                         }
-                        
-                        print(self.arrDropboxImages.count)
-                        
-                        self.arrDropboxImages
-    //                    if (entrycount == 0 && self.arrDropboxImages.count > 0) {
-    //                        self.collectionViewDropbox.hidden = false
-    //                        self.collectionViewDropbox.reloadData()
-    //                    }
-                        
+                                sema.wait()
+                                
+                            
+                        } else {
+                            //File is not an image
+                        }
+                    } else {
+                        //If file have not metadata it mean it is a folder.
                     }
                     
                     
-                } else {
-                    print(error)
+                    self.arrDropboxImages
+                    //                    if (entrycount == 0 && self.arrDropboxImages.count > 0) {
+                    //                        self.collectionViewDropbox.hidden = false
+                    //                        self.collectionViewDropbox.reloadData()
+                    //                    }
+                    
                 }
+                
+                
+            } else {
+                print(error)
             }
         }
+    }
         
         //Logout
         func logoutFromDropBox() {

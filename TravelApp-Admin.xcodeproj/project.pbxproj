@@ -19,6 +19,7 @@
 		F7298A142448EC2D00B19D29 /* PlaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7298A132448EC2D00B19D29 /* PlaceManager.swift */; };
 		F7298A182448F2D600B19D29 /* rome.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = F7298A172448F2D600B19D29 /* rome.xlsx */; };
 		F72AA50F244B904200BA71A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72AA50E244B904200BA71A4 /* SceneDelegate.swift */; };
+		F72AA511244B9C0C00BA71A4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F72AA510244B9C0C00BA71A4 /* GoogleService-Info.plist */; };
 		F7BFE279244B6F56003F3CF3 /* DropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BFE278244B6F56003F3CF3 /* DropBoxView.swift */; };
 		F7BFE27F244B71B6003F3CF3 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BFE27D244B71B6003F3CF3 /* StartViewController.swift */; };
 		F7BFE280244B71B6003F3CF3 /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7BFE27E244B71B6003F3CF3 /* StartViewController.xib */; };
@@ -40,6 +41,7 @@
 		F7298A132448EC2D00B19D29 /* PlaceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceManager.swift; sourceTree = "<group>"; };
 		F7298A172448F2D600B19D29 /* rome.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = rome.xlsx; sourceTree = "<group>"; };
 		F72AA50E244B904200BA71A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F72AA510244B9C0C00BA71A4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F7BFE278244B6F56003F3CF3 /* DropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropBoxView.swift; sourceTree = "<group>"; };
 		F7BFE27D244B71B6003F3CF3 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		F7BFE27E244B71B6003F3CF3 /* StartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartViewController.xib; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				F72989FE2448D8E500B19D29 /* Assets.xcassets */,
 				F7298A032448D8E500B19D29 /* LaunchScreen.storyboard */,
 				F7298A062448D8E500B19D29 /* Info.plist */,
+				F72AA510244B9C0C00BA71A4 /* GoogleService-Info.plist */,
 				F7298A002448D8E500B19D29 /* Preview Content */,
 				F7298A0E2448DB7900B19D29 /* Additional */,
 			);
@@ -193,6 +196,7 @@
 			files = (
 				F7298A052448D8E500B19D29 /* LaunchScreen.storyboard in Resources */,
 				F7298A022448D8E500B19D29 /* Preview Assets.xcassets in Resources */,
+				F72AA511244B9C0C00BA71A4 /* GoogleService-Info.plist in Resources */,
 				F7298A182448F2D600B19D29 /* rome.xlsx in Resources */,
 				F72989FF2448D8E500B19D29 /* Assets.xcassets in Resources */,
 				F7BFE280244B71B6003F3CF3 /* StartViewController.xib in Resources */,
@@ -403,7 +407,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Company-name.TravelApp-Admin";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ivanouanton.TravelApp-Admin";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -425,7 +429,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Company-name.TravelApp-Admin";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ivanouanton.TravelApp-Admin";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
