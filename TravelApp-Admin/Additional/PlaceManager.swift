@@ -32,32 +32,50 @@ class PlaceManager {
                 print("error")
                 return
         }
+        var places = [Place]()
         
         do{
             let sharedStrings = try file.parseSharedStrings()
-            
             for path in try file.parseWorksheetPaths() {
                 let worksheet = try file.parseWorksheet(at: path)
-                for row in worksheet.data?.rows ?? [] {
-                    var f: String = ""
-                    for (index, c) in row.cells.enumerated() {
-                        if (index == 2) {
-                            getCoordinate(with: c.stringValue(sharedStrings) ?? "")
-                        }
-                        // print(index, c.stringValue(sharedStrings))
-                        let v = c.stringValue(sharedStrings)
-                        f += " " + (v ?? "nil")
-                    }
-                    print(f)
+                
+                for rowInd in 3..<(worksheet.data?.rows ?? []).count - 2 {
+                    let dd = worksheet.data?.rows[rowInd].cells
+                    let vv = dd?.compactMap{$0.stringValue(sharedStrings)} ?? []
+                    var newPlace = Place(with: vv)
+                    places.append(newPlace)
+                    
+//                    self.getCoordinate(with: newPlace.addressCode) { (geoPoint) in
+//                        newPlace.location = geoPoint
+//                          places.append(newPlace)
+//                    }
                 }
             }
         } catch(let error) {
             print(error.localizedDescription)
         }
+        
+        let group = DispatchGroup()
+        
+        for var (index, place) in places.enumerated() {
+            group.enter()
+            self.getCoordinate(with: place.addressCode) { (geoPoint) in
+                places[index].location = geoPoint!
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            places.forEach{ self.savePlace($0) }
+            print(places.count)
+        }
+        
+        
+
     }
     
 
-    func getCoordinate(with address: String) {
+    func getCoordinate(with address: String, completionHandler: @escaping (_ loc: GeoPoint?) -> Void) {
         NetworkProvider.shared.getMoyaProvider().request(.geocode(address: address)) { result in
             switch result{
             case .success(let response):
@@ -79,6 +97,8 @@ class PlaceManager {
                             print("location not found")
                             return
                     }
+                    
+                    completionHandler(GeoPoint(latitude: lat, longitude: lng))
                     
                     print("\(lat) \(lng)")
                     
@@ -269,20 +289,37 @@ class PlaceManager {
             return directoryURL.appendingPathComponent(pathComponent) as NSURL
         }
     
+    func savePlace(_ place: Place) {
+        let db = Firestore.firestore()
+        var ref: DocumentReference? = nil
+        ref = db.collection("places2").addDocument(data: place.getData()) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+    }
     
     func saveData() {
+        
+        let db1 = Firestore.firestore()
+        let documentRefString = db1.collection("gs:/trello-2704d.appspot.com/rome_places").document("Arch of Titus.jpg")
+        let userRef = db1.document(documentRefString.path)
+        
+        
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
         ref = db.collection("colin").addDocument(data: [
             "address": "Ada",
-            "audio": "Lovelace",
-            "category": 1815,
-            "description": ,
-            "image": ,
-            "isMustVisit": ,
-            "location": ,
-            "name": ,
-            "price": ,
+            "audio": NSNull(),
+            "category": "cult sites",
+            "description": NSNull(),
+            "image": userRef,
+            "isMustVisit": true,
+            "location": GeoPoint(latitude: 41.2342345, longitude: 41.1234567),
+            "name": "Some name",
+            "price": 1,
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
