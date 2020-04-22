@@ -19,7 +19,8 @@ class StartViewController: UIViewController {
     }
 
     @IBAction func doSomeAction(_ sender: UIButton) {
-        PlaceManager.shared.getDPImages(with: self)
+//        PlaceManager.shared.getDPImages(with: self)
+        PlaceManager.shared.saveData()
     }
 
 }

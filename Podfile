@@ -8,6 +8,8 @@ target 'TravelApp-Admin' do
   pod 'SwiftyDropbox'
   
   pod 'Firebase/Storage'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
 
 
 end
