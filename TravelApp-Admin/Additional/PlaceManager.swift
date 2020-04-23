@@ -292,7 +292,7 @@ class PlaceManager {
     func savePlace(_ place: Place) {
         let db = Firestore.firestore()
         var ref: DocumentReference? = nil
-        ref = db.collection("places2").addDocument(data: place.getData()) { err in
+        ref = db.collection("places").addDocument(data: place.getData()) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             } else {

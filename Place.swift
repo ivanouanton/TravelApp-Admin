@@ -27,7 +27,8 @@ struct Place {
         addressCode = data[2]
         category = Category(data[3])!
         price = Price(rawValue: data[4])!
-        isMustVisit = data[5] == "No" ? false : true
+        let isMust = data[5].trimmingCharacters(in: .whitespacesAndNewlines)
+        isMustVisit = isMust == "No" ? false : true
     }
     
     func getData() -> [String: Any] {
@@ -41,7 +42,7 @@ struct Place {
             "category": self.category.getFirVal(),
             "description": NSNull(),
             "image": userRef,
-            "isMustVisit": true,
+            "isMustVisit": isMustVisit,
             "location": location!,
             "name": name,
             "price": price.getFirVal(),
